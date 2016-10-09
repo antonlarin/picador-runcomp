@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import sys, os
+import comparators
 
 
 def parse_args():
@@ -17,15 +18,6 @@ def parse_args():
     return sys.argv[1:3]
 
 
-def load(datafile):
-    contents = []
-    for line in datafile:
-        _, energy = line.rstrip().split()
-        contents.append(float(energy))
-
-    return contents
-
-
 def main():
     dir1, dir2 = parse_args()
 
@@ -36,18 +28,7 @@ def main():
     file1 = open(path1, 'rt')
     file2 = open(path2, 'rt')
 
-    file1_contents = load(file1)
-    file2_contents = load(file2)
-
-    if len(file1_contents) != len(file2_contents):
-        print('Dimensions of FieldEnergy don\'t match.')
-        sys.exit(102)
-
-    diff = 0
-    for item1, item2 in zip(file1_contents, file2_contents):
-        diff = max((diff, abs(item1 - item2)))
-
-    print('Maximum value of difference: {0:.6g}'.format(diff))
+    comparators.fieldenergy.compare(file1, file2)
 
 
 if __name__ == '__main__':
