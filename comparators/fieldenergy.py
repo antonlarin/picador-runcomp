@@ -1,11 +1,9 @@
+def name():
+    return 'FieldEnergy'
 
-def _load(datafile):
-    contents = []
-    for line in datafile:
-        _, energy = line.rstrip().split()
-        contents.append(float(energy))
 
-    return contents
+def file_list():
+    return [ 'FieldEnergy.txt' ]
 
 
 def compare(file1, file2):
@@ -21,4 +19,13 @@ def compare(file1, file2):
         diff = max((diff, abs(item1 - item2)))
 
     print('Maximum value of difference: {0:.6g}'.format(diff))
+
+
+def _load(datafile):
+    contents = []
+    for line in datafile:
+        _, energy = line.rstrip().split()
+        contents.append(float(energy))
+
+    return contents
 
