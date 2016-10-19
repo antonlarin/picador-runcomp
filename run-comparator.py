@@ -65,6 +65,8 @@ def main():
             with open(path1, 'rt') as file1, open(path2, 'rt') as file2:
                 comparator.compare(file1, file2)
 
+        print()
+
 
 if __name__ == '__main__':
     main()

@@ -1,5 +1,6 @@
 import fieldenergy
+import parsedinput
 
 def get_all():
-    return [ fieldenergy ]
+    return [ fieldenergy, parsedinput ]
 
