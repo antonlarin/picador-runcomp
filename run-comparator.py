@@ -21,8 +21,8 @@ def parse_args():
 def find_files(base_dir, filenames):
     results = []
     old_wd = os.getcwd()
+    os.chdir(base_dir)
     for filename in filenames:
-        os.chdir(base_dir)
         results.extend(glob.glob(filename))
 
     os.chdir(old_wd)
