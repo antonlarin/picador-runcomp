@@ -1,21 +1,18 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-import sys, os, glob
+import os, glob
+import argparse
+
 import comparators
 
 
 def parse_args():
-    info = """
-    Wrong number of args.
-
-    USAGE: [python] run_comparator.py <run_dir1> <run_dir2>
-    """
-    if len(sys.argv) != 3:
-        print(info)
-        sys.exit(1)
-
-    return sys.argv[1:3]
+    parser = argparse.ArgumentParser(
+            description='Compare outputs of Picador runs.')
+    parser.add_argument('outdir1', help='Picador output directory')
+    parser.add_argument('outdir2', help='Picador output directory')
+    return parser.parse_args()
 
 
 def find_files(base_dir, filenames):
@@ -49,7 +46,8 @@ def compare_file_lists(dir1_files, dir2_files):
 
 
 def main():
-    dir1, dir2 = parse_args()
+    args = parse_args()
+    dir1, dir2 = args.outdir1, args.outdir2
 
     for comparator in comparators.get_all():
         print('Comparing {}'.format(comparator.name()))
