@@ -21,7 +21,7 @@ def _compare_data(filename, file1, file2, accuracy):
     file2_data = _load_data(file2)
 
     if len(file1_data) != len(file2_data):
-        print('{}: Different matrix sizes in BOData'.format( filename))
+        print('{}: Different matrix sizes in BOData'.format(filename))
         return MISMATCH
 
     max_diff = 0
