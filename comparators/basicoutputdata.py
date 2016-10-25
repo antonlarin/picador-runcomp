@@ -1,31 +1,19 @@
 from  __future__ import print_function
-import os, os.path
-
-import common
+import os
 
 
 def name():
-    return 'BasicOutput'
+    return 'BasicOutput-data'
 
 
 def file_list():
-    return [
-        'BasicOutput' + os.sep + 'logs' + os.sep + '??????.log',
-        'BasicOutput' + os.sep + 'data' + os.sep + '*' + os.sep + '*.txt'
-    ]
+    return [ 'BasicOutput{0}data{0}*{0}*.txt'.format(os.sep) ]
 
 
 def compare(file1, file2, accuracy):
-    _, extension = os.path.splitext(file1.name)
-
-    if extension == '.log':
-        print('Logs:', end=' ')
-        common.compare_line_by_line(file1, file2)
-    else: # extension == '.txt':
-        path1 = file1.name
-        filename = os.sep.join(path1.rsplit(os.sep, 2)[1:])
-        print('{}:'.format(filename), end=' ')
-        _compare_data(filename, file1, file2, accuracy)
+    filename = os.sep.join(file1.name.rsplit(os.sep, 2)[1:])
+    print('{}:'.format(filename), end=' ')
+    _compare_data(filename, file1, file2, accuracy)
 
 
 def _compare_data(filename, file1, file2, accuracy):

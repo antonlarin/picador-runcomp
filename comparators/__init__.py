@@ -1,7 +1,8 @@
 import fieldenergy
 import parsedinput
-import basicoutput
+import basicoutputlogs
+import basicoutputdata
 
 def get_all():
-    return [ fieldenergy, parsedinput, basicoutput ]
+    return [ fieldenergy, parsedinput, basicoutputlogs, basicoutputdata ]
 
