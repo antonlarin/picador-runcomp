@@ -58,13 +58,17 @@ def main():
 
         common_files = compare_file_lists(dir1_files, dir2_files)
 
+        status = comparators.MATCH
         for filename in common_files:
             path1 = dir1 + os.sep + filename
             path2 = dir2 + os.sep + filename
 
             with open(path1, 'rt') as file1, open(path2, 'rt') as file2:
-                comparator.compare(file1, file2, args.accuracy)
+                status = status.update(
+                        comparator.compare(file1, file2, args.accuracy))
 
+        if status == comparators.MATCH:
+            print('Everything matches')
         print()
 
 

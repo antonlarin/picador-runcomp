@@ -1,3 +1,6 @@
+from common import MATCH, MISMATCH
+
+
 def name():
     return 'FieldEnergy'
 
@@ -12,7 +15,7 @@ def compare(file1, file2, accuracy):
 
     if len(file1_contents) != len(file2_contents):
         print('Different number of iterations in FieldEnergy files.')
-        return
+        return MISMATCH
 
     max_diff = 0
     for value1, value2 in zip(file1_contents, file2_contents):
@@ -26,8 +29,9 @@ def compare(file1, file2, accuracy):
 
     if max_diff > accuracy:
         print('Maximum value of difference: {0:.6g}'.format(max_diff))
+        return MISMATCH
     else:
-        print('Everything matches')
+        return MATCH
 
 
 def _load(datafile):

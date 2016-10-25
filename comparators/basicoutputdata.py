@@ -1,6 +1,7 @@
 from  __future__ import print_function
 import os
 
+from common import MATCH, MISMATCH
 
 def name():
     return 'BasicOutput-data'
@@ -12,8 +13,7 @@ def file_list():
 
 def compare(file1, file2, accuracy):
     filename = os.sep.join(file1.name.rsplit(os.sep, 2)[1:])
-    print('{}:'.format(filename), end=' ')
-    _compare_data(filename, file1, file2, accuracy)
+    return _compare_data(filename, file1, file2, accuracy)
 
 
 def _compare_data(filename, file1, file2, accuracy):
@@ -21,9 +21,8 @@ def _compare_data(filename, file1, file2, accuracy):
     file2_data = _load_data(file2)
 
     if len(file1_data) != len(file2_data):
-        print('Different matrix sizes in BOData, filename: {}'.format(
-            filename))
-        return
+        print('{}: Different matrix sizes in BOData'.format( filename))
+        return MISMATCH
 
     max_diff = 0
     for value1, value2 in zip(file1_data, file2_data):
@@ -37,9 +36,11 @@ def _compare_data(filename, file1, file2, accuracy):
         max_diff = max((max_diff, rel_diff))
 
     if max_diff > accuracy:
-        print('Maximum relative difference: {0:.6g}'.format(max_diff))
+        print('{0}: Maximum relative difference {1:.6g}'.format(
+            filename, max_diff))
+        return MISMATCH
     else:
-        print('Everything matches')
+        return MATCH
 
 
 def _load_data(datafile):
