@@ -12,6 +12,8 @@ def parse_args():
             description='Compare outputs of Picador runs.')
     parser.add_argument('outdir1', help='Picador output directory')
     parser.add_argument('outdir2', help='Picador output directory')
+    parser.add_argument('-a', '--accuracy', type=float, metavar='EPS',
+            help='hide output matching with specified accuracy')
     return parser.parse_args()
 
 
@@ -61,7 +63,7 @@ def main():
             path2 = dir2 + os.sep + filename
 
             with open(path1, 'rt') as file1, open(path2, 'rt') as file2:
-                comparator.compare(file1, file2)
+                comparator.compare(file1, file2, args.accuracy)
 
         print()
 

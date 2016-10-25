@@ -6,7 +6,7 @@ def file_list():
     return [ 'FieldEnergy.txt' ]
 
 
-def compare(file1, file2):
+def compare(file1, file2, accuracy):
     file1_contents = _load(file1)
     file2_contents = _load(file2)
 
@@ -14,11 +14,20 @@ def compare(file1, file2):
         print('Different number of iterations in FieldEnergy files.')
         return
 
-    diff = 0
-    for item1, item2 in zip(file1_contents, file2_contents):
-        diff = max((diff, abs(item1 - item2)))
+    max_diff = 0
+    for value1, value2 in zip(file1_contents, file2_contents):
+        abs_diff = abs(value1 - value2)
+        try:
+            base = min(filter(lambda x: x != 0, map(abs, [value1, value2])))
+            rel_diff = abs_diff / base
+        except ValueError:
+            rel_diff = 0
+        max_diff = max((max_diff, rel_diff))
 
-    print('Maximum value of difference: {0:.6g}'.format(diff))
+    if max_diff > accuracy:
+        print('Maximum value of difference: {0:.6g}'.format(max_diff))
+    else:
+        print('Everything matches')
 
 
 def _load(datafile):

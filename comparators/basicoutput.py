@@ -15,7 +15,7 @@ def file_list():
     ]
 
 
-def compare(file1, file2):
+def compare(file1, file2, accuracy):
     _, extension = os.path.splitext(file1.name)
 
     if extension == '.log':
@@ -25,10 +25,10 @@ def compare(file1, file2):
         path1 = file1.name
         filename = os.sep.join(path1.rsplit(os.sep, 2)[1:])
         print('{}:'.format(filename), end=' ')
-        _compare_data(filename, file1, file2)
+        _compare_data(filename, file1, file2, accuracy)
 
 
-def _compare_data(filename, file1, file2):
+def _compare_data(filename, file1, file2, accuracy):
     file1_data = _load_data(file1)
     file2_data = _load_data(file2)
 
@@ -48,7 +48,10 @@ def _compare_data(filename, file1, file2):
 
         max_diff = max((max_diff, rel_diff))
 
-    print('Maximum relative difference: {0:.6g}'.format(max_diff))
+    if max_diff > accuracy:
+        print('Maximum relative difference: {0:.6g}'.format(max_diff))
+    else:
+        print('Everything matches')
 
 
 def _load_data(datafile):
