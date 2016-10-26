@@ -12,13 +12,9 @@ def file_list():
 
 
 def compare(file1, file2, accuracy):
-    filename = os.sep.join(file1.name.rsplit(os.sep, 2)[1:])
-    return _compare_data(filename, file1, file2, accuracy)
-
-
-def _compare_data(filename, file1, file2, accuracy):
     file1_data = _load_data(file1)
     file2_data = _load_data(file2)
+    filename = os.sep.join(file1.name.rsplit(os.sep, 2)[1:])
 
     if len(file1_data) != len(file2_data):
         print('{}: Different matrix sizes in BOData'.format(filename))
