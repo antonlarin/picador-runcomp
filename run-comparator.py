@@ -56,7 +56,8 @@ def main():
         dir1_files = find_files(dir1, comparator.file_list())
         dir2_files = find_files(dir2, comparator.file_list())
 
-        common_files = compare_file_lists(dir1_files, dir2_files)
+        common_files = list(compare_file_lists(dir1_files, dir2_files))
+        common_files.sort()
 
         status = comparators.MATCH
         for filename in common_files:

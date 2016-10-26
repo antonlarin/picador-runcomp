@@ -8,7 +8,8 @@ def name():
 
 
 def file_list():
-    return [ 'BasicOutput{0}data{0}*{0}*.txt'.format(os.sep) ]
+    pattern = 'BasicOutput{0}data{0}*{0}{1}.txt'.format(os.sep, '[0-9]' * 6)
+    return [ pattern ]
 
 
 def compare(file1, file2, accuracy):

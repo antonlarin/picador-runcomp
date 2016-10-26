@@ -8,9 +8,29 @@ def name():
 
 
 def file_list():
-    return [
-            'statdata{0}*{0}*{0}*.txt'.format(os.sep)     # QED_Statistics
-    ]
+    patterns = []
+
+    # QEDstatistics patterns
+    for dir1 in ('ph', 'el', 'pos'):
+        for dir2 in ('EnSp', 'EnSpSph', 'angSpSph', 'EnAngSp'):
+            patterns.append('statdata{0}{1}{0}{2}{0}*.txt'.format(os.sep,
+                dir1, dir2))
+    patterns.append('statdata{0}ph{0}phAngle{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}EnSpPlane{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}NPlaneUp{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}NPlaneDown{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}ChiT{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}PhBirth{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}PhDeath{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}PhEnEl{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}PhChiEl{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}ph{0}PhT{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}el{0}ElEnPh{0}*.txt'.format(os.sep))
+    patterns.append('statdata{0}el{0}ElChiPh{0}*.txt'.format(os.sep))
+
+    # TODO: add other client modules of StatData
+
+    return patterns
 
 
 def compare(file1, file2, accuracy):
