@@ -68,7 +68,10 @@ def main():
                         comparator.compare(file1, file2, args.accuracy))
 
         if status == comparators.MATCH:
-            print('Everything matches')
+            if len(common_files) == 0:
+                print('Nothing to compare')
+            else:
+                print('Everything matches')
         print()
 
 
