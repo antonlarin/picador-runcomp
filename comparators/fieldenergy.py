@@ -27,8 +27,11 @@ def compare(file1, file2, accuracy):
             rel_diff = 0
         max_diff = max((max_diff, rel_diff))
 
-    if max_diff > accuracy:
-        print('Maximum value of difference: {0:.6g}'.format(max_diff))
+    if accuracy == None:
+        print('Maximum relative difference {0:.6g}'.format(max_diff))
+        return MISMATCH
+    elif max_diff > accuracy:
+        print('Relative difference {0:.6g} too large'.format(max_diff))
         return MISMATCH
     else:
         return MATCH
