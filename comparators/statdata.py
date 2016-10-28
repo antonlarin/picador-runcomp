@@ -38,8 +38,11 @@ def compare(file1, file2, accuracy):
     file2_data = _load(file2)
     filename = os.sep.join(file1.name.rsplit(os.sep, 3)[1:])
 
-    if len(file1_data) != len(file2_data):
-        print('{}: Different matrix sizes in StatData'.format(filename))
+    size1 = len(file1_data)
+    size2 = len(file2_data)
+    if size1 != size2:
+        print('{}: Different number of output iterations'.format(filename))
+        print('\t{0} vs {1}'.format(size1, size2))
         return MISMATCH
 
     max_diff = 0

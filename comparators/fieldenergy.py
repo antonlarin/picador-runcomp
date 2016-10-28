@@ -13,8 +13,11 @@ def compare(file1, file2, accuracy):
     file1_contents = _load(file1)
     file2_contents = _load(file2)
 
-    if len(file1_contents) != len(file2_contents):
-        print('Different number of iterations in FieldEnergy files.')
+    size1 = len(file1_contents)
+    size2 = len(file2_contents)
+    if size1 != size2:
+        print('Different number of output iterations')
+        print('\t{0} vs {1}'.format(size1, size2))
         return MISMATCH
 
     max_diff = 0

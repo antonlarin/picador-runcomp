@@ -16,12 +16,18 @@ def compare(file1, file2, accuracy):
     file2_contents = _load(file2)
 
     filename = os.sep.join(file1.name.rsplit(os.sep, 2)[1:])
-    if len(file1_contents) != len(file2_contents):
-        print('{}: Different number of iterations'.format(filename))
+    height1 = len(file1_contents)
+    height2 = len(file2_contents)
+    if height1 != height2:
+        print('{}: Different number of output iterations'.format(filename))
+        print('\t{0} vs {1}'.format(height1, height2))
         return MISMATCH
 
-    if len(file1_contents[1]) != len(file2_contents[1]):
+    width1 = len(file1_contents[1])
+    width2 = len(file2_contents[2])
+    if width1 != width2:
         print('{}: Different number of tracked values'.format(filename))
+        print('\t{0} vs {1}'.format(width1, width2))
         return MISMATCH
 
     max_diff = 0
@@ -37,7 +43,7 @@ def compare(file1, file2, accuracy):
 
             max_diff = max((max_diff, rel_diff))
 
-    if accuracy == None
+    if accuracy == None:
         print('{0}: Maximum relative difference {1:.6g}'.format(
             filename, max_diff))
         return MISMATCH

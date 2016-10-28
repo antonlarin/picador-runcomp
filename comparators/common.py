@@ -5,8 +5,11 @@ def compare_line_by_line(file1, file2):
     file1_contents = file1.readlines()
     file2_contents = file2.readlines()
 
-    if len(file1_contents) != len(file2_contents):
+    size1 = len(file1_contents)
+    size2 = len(file2_contents)
+    if size1 != size2:
         print('Line count in {} doesn\'t match.'.format(filename))
+        print('\t{0} vs {1}'.format(size1, size2))
         return MISMATCH
 
     mismatches_exist = False
